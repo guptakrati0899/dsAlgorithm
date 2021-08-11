@@ -1,20 +1,21 @@
 package dsAlgorithm;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Random;
+import java.io.File;
+import java.io.FileWriter;
 
-public class Algo {
-	
-	
-
+public class Algo
+{
 	BufferedReader br;
 	private final String REGEX_NAME = "<<name>>";
 	private final String REGEX_FULLNAME = "<<full name>> ";
@@ -26,7 +27,27 @@ public class Algo {
 		br = new BufferedReader(new InputStreamReader(System.in));
 	}
 
+	//Regex pattern matcher match the string and replace the regex pattern with user details.
+	public String convertString(UserDetails userDetails,String message){
+		Pattern p = Pattern.compile(REGEX_NAME);
+		Matcher m = p.matcher(message); 
+		message = m.replaceAll(userDetails.getfName());
 
+		p = Pattern.compile(REGEX_FULLNAME);
+		m = p.matcher(message); 
+		message = m.replaceAll(userDetails.getfName()+" "+userDetails.getlName());
+
+		p = Pattern.compile(REGEX_MOBILE_NO);
+		m = p.matcher(message); 
+		message = m.replaceAll(userDetails.mobileNo());
+
+		p = Pattern.compile(REGEX_DATE);
+		m = p.matcher(message); 
+		message = m.replaceAll(userDetails.date());
+
+		return message;
+	}
+	
 	//take input word
 	public String inputString(){
 		try{
@@ -78,7 +99,24 @@ public class Algo {
 		return array;
 	}
 
+	
 
+	//Function take String in dd/mm/yyyy format and return Date Object
+	public Date printDate(String date){
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+		try{
+			return sdf.parse(date);
+		}
+		catch(ParseException pe){
+			return null;
+		}
+	}
+
+	//format date object in this format 01/12/2016 
+	public String getFormatedDate(Date date){
+		SimpleDateFormat sdf=new SimpleDateFormat("dd/mm/yyyy");
+		return sdf.format(date);
+	}
 
 	//Take file name as input and return string of file text
 	public String getFileText(String fileName){
