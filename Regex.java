@@ -25,7 +25,7 @@ public class Regex {
 		
 		//Setting current date
 		user.setdate(u.getFormatedDate(new Date()));
-		System.out.println(u.convertString(user,u.getFileText("C:\\Users\\Asus\\eclipse-workspace\\dsAlgorithm\\Demofolder\\text.txt")));	
+		System.out.println(u.convertString(user,u.getFileText("C:\\Users\\Asus\\eclipse-workspace\\dsAlgorithm\\Demofolder")));	
 	}
 }
 
